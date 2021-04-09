@@ -1,0 +1,259 @@
+<div>
+  <nav class="header__nav">
+    <ul class="class header__nav-list">
+      <li class="class header__nav-item">
+        <a routerLink="/home">Trang chủ</a>
+      </li>
+      <li class="class header__nav-item">
+        <a routerLink="/profile">Trang cá nhân</a>
+      </li>
+    </ul>
+  </nav>
+
+  <nav class="header__nav">
+    <ul class="class header__nav-list">
+      <li class="class header__nav-tag">Chỉnh sửa trang cá nhân</li>
+      <input id="find" type="text" placeholder="Tìm kiếm" />
+    </ul>
+  </nav>
+
+  <form (ngSubmit)="save()" [formGroup]="profileForm">
+    <div class="info">
+      <img src="assets/image/quynh.jpg" alt="Tên" width="40" height="60" />
+      <div>Dương Diễm Quỳnh</div>
+      <div>8.5</div>
+      <button>Lưu</button>
+    </div>
+
+    <div>
+      <label for="name"> Tên sinh viên</label>
+      <input type="text" id="name" formControlName="username" />
+    </div>
+
+    <div>
+      <label for="quotes"> Châm ngôn</label>
+      <input type="text" id="" formControlName="quotes" />
+    </div>
+
+    <div>
+      Viện:
+      <select formControlName="school">
+        <option *ngFor="let school of schools" [value]="school">
+          {{ school }}
+        </option>
+      </select>
+    </div>
+
+    <div>
+      Khóa:
+      <select
+        formControlName="year"
+        #year
+        (change)="getClasses($event, year.value)"
+      >
+        <option *ngFor="let year of years" [value]="year._id">
+          {{ year.name }}
+        </option>
+      </select>
+    </div>
+
+    <div>
+      Lớp:
+      <select formControlName="class">
+        <option *ngFor="let class of classes" [value]="class">
+          {{ class.name }}
+        </option>
+      </select>
+    </div>
+
+    <div>
+      Chương trình đào tạo
+      <select formControlName="degree">
+        <option *ngFor="let degree of degrees" [value]="degree">
+          {{ degree }}
+        </option>
+      </select>
+    </div>
+
+    <div>
+      Chuyên ngành
+      <select
+        formControlName="major"
+        #major
+        (change)="getSubjects($event, major.value)"
+      >
+        <option *ngFor="let major of majors" [value]="major._id">
+          {{ major.name }}
+        </option>
+      </select>
+    </div>
+
+    <div>
+      <label> Nghiên cứu</label>
+      <label> (Các project, BTL, đồ án đã và đang làm) </label>
+      <input type="text" formControlName="project" />
+    </div>
+
+    <div formGroupName="strength">
+      <label> Điểm mạnh</label>
+      <input type="text" formGroupName="content" />
+      <select formControlName="isVisible">
+        <option value="hidden">Ẩn</option>
+        <option value="show">Hiện</option>
+      </select>
+    </div>
+
+    <div formGroupName="weakness">
+      <label> Điểm yếu</label>
+      <input type="text" formGroupName="content" />
+      <select formControlName="isVisible">
+        <option value="hidden">Ẩn</option>
+        <option value="show">Hiện</option>
+      </select>
+    </div>
+
+    <div formGroupName="hobbies">
+      <label> Sở thích</label>
+      <input type="text" formGroupName="content" />
+      <select formControlName="isVisible">
+        <option value="hidden">Ẩn</option>
+        <option value="show">Hiện</option>
+      </select>
+    </div>
+
+    <div>
+      Lab nghiên cứu:
+      <select formControlName="lab">
+        <option *ngFor="let lab of labs" [value]="lab">
+          {{ lab.name }}
+        </option>
+      </select>
+    </div>
+
+    <div>
+      Giáo viên hướng dẫn:
+      <select formControlName="professor">
+        <option *ngFor="let professor of professors" [value]="professor">
+          {{ professor }}
+        </option>
+      </select>
+    </div>
+
+    <div formGroupName="languages">
+      Ngoại ngữ
+      <label for="toeic"> Toeic</label>
+      <input type="text" id="toeic" formControlName="toeic" />
+
+      <label for="ietls"> Ietls</label>
+      <input type="text" id="ietls" formControlName="ietls" />
+
+      <label for="aptis"> Aptis</label>
+      <input type="text" id="aptis" formControlName="aptis" />
+
+      <label for="others"> Khác </label>
+      <input type="text" id="others" formControlName="others" />
+    </div>
+
+    <div formGroupName="skills">
+      Kĩ năng
+      <label for="altium"> Altium</label>
+      <input
+        type="range"
+        min="0"
+        max="5"
+        id="altium"
+        formControlName="altium"
+      />
+
+      <label for="cpp"> C++</label>
+      <input type="range" min="0" max="5" id="cpp" formControlName="cpp" />
+
+      <label for="matlab"> Matlab</label>
+      <input
+        type="range"
+        min="0"
+        max="5"
+        id="matlab"
+        formControlName="matlab"
+      />
+
+      <label for="hfss"> HFSS </label>
+      <input type="range" min="0" max="5" d="hfss" formControlName="hfss" />
+    </div>
+
+    <div formGroupName="softSkills">
+      Kĩ năng mềm
+      <label for="selfwork"> Làm việc độc lập</label>
+      <input
+        type="range"
+        min="0"
+        max="5"
+        id="selfwork"
+        formControlName="selfwork"
+      />
+
+      <label for="teamwork"> Làm việc nhóm</label>
+      <input
+        type="range"
+        min="0"
+        max="5"
+        id="teamwork"
+        formControlName="teamwork"
+      />
+
+      <label for="organize"> Tổ chức</label>
+      <input
+        type="range"
+        min="0"
+        max="5"
+        id="organize"
+        formControlName="organize"
+      />
+
+      <label for="present"> Trình bày, Giao tiếp </label>
+      <input
+        type="range"
+        min="0"
+        max="5"
+        d="present"
+        formControlName="present"
+      />
+
+      <label for="handle"> Xử lý tình huống </label>
+      <input type="range" min="0" max="5" d="handle" formControlName="handle" />
+    </div>
+
+    <div>
+      Điểm môn học
+      <div *ngFor="let subject of subjects">
+        <label>{{subject.name}}</label>
+        <input type="text" id="" />
+      </div>
+    </div>
+
+    <div formGroupName="address">
+      <label> Chỗ ở</label>
+      <input type="text" formGroupName="content" />
+      <select formControlName="isVisible">
+        <option value="hidden">Ẩn</option>
+        <option value="show">Hiện</option>
+      </select>
+    </div>
+    <div formGroupName="hobbies">
+      <label> Chiều cao</label>
+      <input type="text" formGroupName="content" />
+      <select formControlName="isVisible">
+        <option value="hidden">Ẩn</option>
+        <option value="show">Hiện</option>
+      </select>
+    </div>
+    <div formGroupName="hobbies">
+      <label> Cân nặng</label>
+      <input type="text" formGroupName="content" />
+      <select formControlName="isVisible">
+        <option value="hidden">Ẩn</option>
+        <option value="show">Hiện</option>
+      </select>
+    </div>
+  </form>
+</div>

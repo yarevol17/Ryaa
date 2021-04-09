@@ -1,0 +1,30 @@
+
+<div>
+  <nav class = header__nav>
+    <ul class="class header__nav-list">
+      <li class="class header__nav-item"><a routerLink="/home">Trang chủ</a></li>
+      <li class="class header__nav-tag">Đăng nhập</li>
+      <input id = "find" type="text" placeholder = "Tìm kiếm">
+    </ul>
+  </nav>
+
+  <div class="form">
+    <input id = "account" type="text" [(ngModel)]="account" placeholder = "Tài khoản">
+  </div>
+
+  <div class="form">
+    <input id = "password" type="text" [(ngModel)]="password" placeholder = "Mật khẩu">
+  </div>
+
+  <button (click)="signIn()">Đăng nhập</button>
+  <div *ngIf="checkValidate">
+    <p>Không được để trống các giá trị!</p>
+  </div>
+  <div *ngIf="checkAccount">
+    <p>Tài khoản hoặc mật khẩu không đúng!</p>
+  </div>
+  <div class = "question">
+    Bạn chưa có tài khoản?
+  </div>
+  <div class = "" routerLink="/sign-up">Đăng kí</div>
+</div>
