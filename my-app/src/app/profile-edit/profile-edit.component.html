@@ -81,6 +81,7 @@
         formControlName="major"
         #major
         (change)="getSubjects($event, major.value)"
+        (change)="getSkills($event, major.value)"
       >
         <option *ngFor="let major of majors" [value]="major._id">
           {{ major.name }}
@@ -142,19 +143,19 @@
     <div formGroupName="languages">
       Ngoại ngữ
       <label for="toeic"> Toeic</label>
-      <input type="text" id="toeic" formControlName="toeic" />
+      <input type="number" id="toeic" formControlName="toeic" />
 
       <label for="ietls"> Ietls</label>
-      <input type="text" id="ietls" formControlName="ietls" />
+      <input type="number" id="ietls" formControlName="ietls" />
 
       <label for="aptis"> Aptis</label>
-      <input type="text" id="aptis" formControlName="aptis" />
+      <input type="number" id="aptis" formControlName="aptis" />
 
       <label for="others"> Khác </label>
-      <input type="text" id="others" formControlName="others" />
+      <input type="number" id="others" formControlName="others" />
     </div>
 
-    <div formGroupName="skills">
+    <!-- <div formGroupName="skills">
       Kĩ năng
       <label for="altium"> Altium</label>
       <input
@@ -179,6 +180,13 @@
 
       <label for="hfss"> HFSS </label>
       <input type="range" min="0" max="5" d="hfss" formControlName="hfss" />
+    </div> -->
+    <div>
+      Kĩ năng
+      <div *ngFor="let skill of skills">
+        <label>{{skill.name}}</label>
+        <input type="range" min="0" max="5" d="" />
+      </div>
     </div>
 
     <div formGroupName="softSkills">

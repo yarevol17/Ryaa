@@ -16,7 +16,7 @@ const routes: Routes = [
   { path: 'sign-up', component: SignUpComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'profile-edit', component: ProfileEditComponent },
-  { path: 'profile-visit', component: ProfileVisitComponent },
+  { path: 'profile-visit/:id', component: ProfileVisitComponent },
   { path: 'add-class', component: AddClassComponent },
 ];
 

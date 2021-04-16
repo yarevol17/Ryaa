@@ -56,3 +56,33 @@ exports.addSubjectToMajor = (req, res, next) => {
       return res.status(500).json({msg: "Lỗi"})
     })
   }
+
+  exports.addSkillToMajor = (req, res, next) => {
+    const majorId = req.params.majorId;
+    const skillId = req.body.skillId;
+    Major.updateOne(
+      { _id: majorId },
+      {
+        $push: {
+          skills: skillId,
+        },
+      }, {
+        new: true
+      }
+    ).then(major => {
+        res.status(201).json(major)
+    }, err => {
+        res.status(500).json(err)
+    })
+  };
+  
+  exports.getSkillsByMajor = (req, res, next) => {
+    const majorId = req.params.majorId;
+    Major.findOne({_id: majorId})
+    .populate('skills', 'name')
+    .then(major => {
+      return res.status(200).json(major.skills)
+    }, err => {
+      return res.status(500).json({msg: "Lỗi"})
+    })
+  }

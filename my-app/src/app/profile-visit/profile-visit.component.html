@@ -16,9 +16,80 @@
     <img src="assets/image/quynh.jpg" alt="Tên" width="40" height="60">
     <div>Dương Diễm Quỳnh</div>
     <div>8.5</div>
-    <button>Chi tiết</button>
-    <button>Chấm điểm</button>
+    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#detail" aria-expanded="false" aria-controls="detail" (click)="getRateDetail()">
+      Chi tiết
+    </button>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+      Chấm điểm
+    </button>
   </div>
+
+  <!-- <div class="collapse" id="detail">
+      <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#all" aria-expanded="true" aria-controls="all">
+        Tất cả
+      </button>
+      <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#undertwo" aria-expanded="false" aria-controls="undertwo">
+        0-1.9
+      </button>
+      <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#underfour" aria-expanded="false" aria-controls="underfour">
+        2.0-3.9
+      </button>
+      <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#undersix" aria-expanded="false" aria-controls="undersix">
+        4.0-5.9
+      </button>
+      <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#undereight" aria-expanded="false" aria-controls="undereight">
+        6.0-7.9
+      </button>
+      <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#underten" aria-expanded="false" aria-controls="underten">
+        8.0-10
+      </button>
+      <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        Collapsible Group Item #1
+      </button>
+  </div>
+
+  <div class="collapse" id="all">
+      <div class="card card-body">Tất cả để ở đây</div>
+  </div>
+  <div class="collapse" id="undertwo">
+    <div class="card card-body">0-1.9 để ở đây</div>
+  </div>
+  <div class="collapse" id="all">
+    <div class="card card-body">2.0-3.9 để ở đây</div>
+  </div>
+  <div class="collapse" id="all">
+    <div class="card card-body">4.0-5.9 để ở đây</div>
+  </div>
+  <div class="collapse" id="all">
+    <div class="card card-body">6.0-7.9 để ở đây</div>
+  </div>
+  <div class="collapse" id="all">
+    <div class="card card-body">8.0-10 để ở đây</div>
+  </div> -->
+
+  <div class="collapse" id="detail">
+
+      <button class="btn btn-primary"  type="button" *ngFor="let range of rateRange" (click)="showRate(range.id)">
+        {{range.rate}}
+      </button>
+
+      <div id="all" class="collapse show" #rateList>
+        <div class="card-body" *ngFor="let rate of rates">
+          {{rate.author}}: {{rate.total}}
+        </div>
+      </div>
+
+      <!-- <div id="undertwo" class="collapse" aria-labelledby="buttonTwo" data-parent="#detail">
+        <div class="card-body" *ngFor="let rate of rateDetail">
+          <div *ngIf="rate.total <=2">
+            {{rate.author}}: {{rate.total}}
+          </div>
+        </div>
+      </div> -->
+
+
+  </div>
+
 <div class="more-info">
 <div>Viện: ĐTVT</div>
 <div>Khóa: 62</div>
@@ -26,4 +97,61 @@
 <div>Chuyên ngành: ĐTMT</div>
 <div>Nghiên cứu: Không</div>
 
+</div>
+
+<!-- modal rating -->
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Chấm điểm</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">Dương Diễm Quỳnh</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="vote roundrect">
+        <div  class="increment up"></div>
+        <div  class="increment down"></div>
+
+        <div class="count" value="ability" >5</div>
+      </div>
+
+      <div class="modal-body">
+        <form [formGroup]="rateForm">
+          <div >
+            <label for="name">Năng lực</label>
+            <input type="range" min="0" max="10" formControlName="ability"/>
+          </div>
+          <div >
+            <label for="name">Trách nhiệm</label>
+            <input type="range" min="0" max="10" formControlName="responsibility"/>
+          </div>
+          <div >
+            <label for="name">Kỉ luật</label>
+            <input type="range" min="0" max="10" formControlName="discipline"/>
+          </div>
+          <div >
+            <label for="name">Nhạy bén</label>
+            <input type="range" min="0" max="10" formControlName="keen"/>
+          </div>
+          <div >
+            <label for="name">Năng động</label>
+            <input type="range" min="0" max="10" formControlName="dynamic"/>
+          </div>
+          <div >
+            <label for="name">Bình luận</label>
+            <input type="text" id="name" formControlName="comment" />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="rating_submit()">Save changes</button>
+      </div>
+    </div>
+  </div>
 </div>

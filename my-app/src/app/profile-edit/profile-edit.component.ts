@@ -37,6 +37,7 @@ export class ProfileEditComponent implements OnInit {
   classes: any = [];
   majors: any = [];
   subjects: any = [];
+  skills: any = [];
   labs: any = [];
   professors: any = [];
   year: string = '';
@@ -178,6 +179,15 @@ export class ProfileEditComponent implements OnInit {
         this.subjects = res,
         console.log(res)
       });
+    }
 
-  }
+  getSkills(event: Event, majorId: any) {
+    console.log(majorId);
+    this.majorService
+      .getSkillsByMajor(majorId)
+      .subscribe((res) => {
+        this.skills = res,
+        console.log(res)
+      });
+    }
 }

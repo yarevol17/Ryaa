@@ -18,4 +18,7 @@ export class MajorService {
   getSubjectsByMajor(majorId: string) {
     return this.http.get(environment.serverURL + 'major/subject/' + majorId)
   }
+  getSkillsByMajor(majorId: string) {
+    return this.http.get(environment.serverURL + 'major/skill/' + majorId)
+  }
 }
