@@ -39,8 +39,8 @@ export class SignInComponent implements OnInit {
   // }
   this.authService.doEmailLogin(this.account.trim(), this.password).then(
     result => {
-      console.log(result)
-      this.router.navigate(['/profile-edit']);
+      AuthService.user = result.user
+      this.router.navigate(['/home/']);
     },
     error => {
       console.log(error)

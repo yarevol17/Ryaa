@@ -9,6 +9,8 @@ import firebase from "firebase/app";
 })
 export class AuthService {
 
+  public static user: any;
+
   constructor(
     private afAuth: AngularFireAuth
   ) { }
@@ -21,6 +23,15 @@ export class AuthService {
   doEmailLogin(email:string, password: string) {
       return this.afAuth
         .signInWithEmailAndPassword(email, password)
+  }
+
+  getUser() {
+    return AuthService.user
+  }
+
+  resolveUser() {
+    this.afAuth.authState.subscribe(user => AuthService.user = user
+    )
   }
 
 }

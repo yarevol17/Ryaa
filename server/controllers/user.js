@@ -1,10 +1,8 @@
 const User = require("../models/user")
 
 exports.createUser = (req, res, next) => {
+       const user = req.params.author_id
 
-    const  user = new User({
-        email: "canh@gmail.com"
-    })
 
     user.save().then(user => console.log(user), err => console.log(err))
 }

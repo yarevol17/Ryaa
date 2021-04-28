@@ -19,77 +19,26 @@
     <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#detail" aria-expanded="false" aria-controls="detail" (click)="getRateDetail()">
       Chi tiết
     </button>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#rate" *ngIf="authService.getUser() && (authService.getUser().uid != id)">
       Chấm điểm
     </button>
   </div>
 
-  <!-- <div class="collapse" id="detail">
-      <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#all" aria-expanded="true" aria-controls="all">
-        Tất cả
-      </button>
-      <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#undertwo" aria-expanded="false" aria-controls="undertwo">
-        0-1.9
-      </button>
-      <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#underfour" aria-expanded="false" aria-controls="underfour">
-        2.0-3.9
-      </button>
-      <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#undersix" aria-expanded="false" aria-controls="undersix">
-        4.0-5.9
-      </button>
-      <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#undereight" aria-expanded="false" aria-controls="undereight">
-        6.0-7.9
-      </button>
-      <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#underten" aria-expanded="false" aria-controls="underten">
-        8.0-10
-      </button>
-      <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-        Collapsible Group Item #1
-      </button>
-  </div>
-
-  <div class="collapse" id="all">
-      <div class="card card-body">Tất cả để ở đây</div>
-  </div>
-  <div class="collapse" id="undertwo">
-    <div class="card card-body">0-1.9 để ở đây</div>
-  </div>
-  <div class="collapse" id="all">
-    <div class="card card-body">2.0-3.9 để ở đây</div>
-  </div>
-  <div class="collapse" id="all">
-    <div class="card card-body">4.0-5.9 để ở đây</div>
-  </div>
-  <div class="collapse" id="all">
-    <div class="card card-body">6.0-7.9 để ở đây</div>
-  </div>
-  <div class="collapse" id="all">
-    <div class="card card-body">8.0-10 để ở đây</div>
-  </div> -->
-
-  <div class="collapse" id="detail">
-
+    <div class="collapse" id="detail">
       <button class="btn btn-primary"  type="button" *ngFor="let range of rateRange" (click)="showRate(range.id)">
         {{range.rate}}
       </button>
-
       <div id="all" class="collapse show" #rateList>
         <div class="card-body" *ngFor="let rate of rates">
           {{rate.author}}: {{rate.total}}
         </div>
       </div>
-
-      <!-- <div id="undertwo" class="collapse" aria-labelledby="buttonTwo" data-parent="#detail">
-        <div class="card-body" *ngFor="let rate of rateDetail">
-          <div *ngIf="rate.total <=2">
-            {{rate.author}}: {{rate.total}}
-          </div>
-        </div>
-      </div> -->
-
-
   </div>
 
+<div>Thông tin chi tiết</div>
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit" *ngIf="authService.getUser() && (authService.getUser().uid == id)">
+    Chỉnh sửa
+  </button>
 <div class="more-info">
 <div>Viện: ĐTVT</div>
 <div>Khóa: 62</div>
@@ -102,23 +51,22 @@
 <!-- modal rating -->
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="rate" tabindex="-1" role="dialog" aria-labelledby="rateTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Chấm điểm</h5>
-        <h5 class="modal-title" id="exampleModalLongTitle">Dương Diễm Quỳnh</h5>
+        <h5 class="modal-title" id="rateTitle">Chấm điểm</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
 
-      <div class="vote roundrect">
+      <!-- <div class="vote roundrect">
         <div  class="increment up"></div>
         <div  class="increment down"></div>
 
         <div class="count" value="ability" >5</div>
-      </div>
+      </div> -->
 
       <div class="modal-body">
         <form [formGroup]="rateForm">
@@ -144,13 +92,254 @@
           </div>
           <div >
             <label for="name">Bình luận</label>
-            <input type="text" id="name" formControlName="comment" />
+            <input type="text" id="" formControlName="comment" />
           </div>
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="rating_submit()">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="editTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editTitle">Chỉnh sửa</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <form (ngSubmit)="save()" [formGroup]="profileForm">
+        <div class="info">
+          <img src="assets/image/quynh.jpg" alt="Tên" width="40" height="60" />
+          <div>Dương Diễm Quỳnh</div>
+          <div>8.5</div>
+          <button>Lưu</button>
+        </div>
+
+        <div>
+          <label for="name"> Tên sinh viên</label>
+          <input type="text" id="name" formControlName="username" />
+        </div>
+
+        <div>
+          <label for="quotes"> Châm ngôn</label>
+          <input type="text" id="" formControlName="quotes" />
+        </div>
+
+        <div>
+          Viện:
+          <select formControlName="school">
+            <option *ngFor="let school of schools" [value]="school">
+              {{ school }}
+            </option>
+          </select>
+        </div>
+
+        <div>
+          Khóa:
+          <select
+            formControlName="year"
+            #year
+            (change)="getClasses($event, year.value)"
+          >
+            <option *ngFor="let year of years" [value]="year._id">
+              {{ year.name }}
+            </option>
+          </select>
+        </div>
+
+        <div>
+          Lớp:
+          <select formControlName="class">
+            <option *ngFor="let class of classes" [value]="class">
+              {{ class.name }}
+            </option>
+          </select>
+        </div>
+
+        <div>
+          Chương trình đào tạo
+          <select formControlName="degree">
+            <option *ngFor="let degree of degrees" [value]="degree">
+              {{ degree }}
+            </option>
+          </select>
+        </div>
+
+        <div>
+          Chuyên ngành
+          <select
+            formControlName="major"
+            #major
+            (change)="getSubjects($event, major.value)"
+            (change)="getSkills($event, major.value)"
+          >
+            <option *ngFor="let major of majors" [value]="major._id">
+              {{ major.name }}
+            </option>
+          </select>
+        </div>
+
+        <div>
+          <label> Nghiên cứu</label>
+          <label> (Các project, BTL, đồ án đã và đang làm) </label>
+          <input type="text" formControlName="project" />
+        </div>
+
+        <div formGroupName="strength">
+          <label> Điểm mạnh</label>
+          <input type="text" formControlName="content" />
+          <select formControlName="isVisible">
+            <option value="hidden">Ẩn</option>
+            <option value="show">Hiện</option>
+          </select>
+        </div>
+
+        <div formGroupName="weakness">
+          <label> Điểm yếu</label>
+          <input type="text" formControlName="content" />
+          <select formControlName="isVisible">
+            <option value="hidden">Ẩn</option>
+            <option value="show">Hiện</option>
+          </select>
+        </div>
+
+        <div formGroupName="hobbies">
+          <label> Sở thích</label>
+          <input type="text" formGroupName="content" />
+          <select formControlName="isVisible">
+            <option value="hidden">Ẩn</option>
+            <option value="show">Hiện</option>
+          </select>
+        </div>
+
+        <div>
+          Lab nghiên cứu:
+          <select formControlName="lab">
+            <option *ngFor="let lab of labs" [value]="lab">
+              {{ lab.name }}
+            </option>
+          </select>
+        </div>
+
+        <div>
+          Giáo viên hướng dẫn:
+          <select formControlName="professor">
+            <option *ngFor="let professor of professors" [value]="professor">
+              {{ professor }}
+            </option>
+          </select>
+        </div>
+
+        <div formGroupName="languages">
+          Ngoại ngữ
+          <label for="toeic"> Toeic</label>
+          <input type="number" id="toeic" formControlName="toeic" />
+
+          <label for="ietls"> Ietls</label>
+          <input type="number" id="ietls" formControlName="ietls" />
+
+          <label for="aptis"> Aptis</label>
+          <input type="number" id="aptis" formControlName="aptis" />
+
+          <label for="others"> Khác </label>
+          <input type="number" id="others" formControlName="others" />
+        </div>
+
+        <div formGroupName="skills">
+          Kĩ năng
+          <div *ngFor="let skill of skills">
+            <label>{{skill.name}}</label>
+            <input type="range" min="0" max="5" d="" formControlName="{{skill.name}}"/>
+          </div>
+        </div>
+
+        <div formGroupName="softSkills">
+          Kĩ năng mềm
+          <label for="selfwork"> Làm việc độc lập</label>
+          <input
+            type="range"
+            min="0"
+            max="5"
+            id="selfwork"
+            formControlName="selfwork"
+          />
+
+          <label for="teamwork"> Làm việc nhóm</label>
+          <input
+            type="range"
+            min="0"
+            max="5"
+            id="teamwork"
+            formControlName="teamwork"
+          />
+
+          <label for="organize"> Tổ chức</label>
+          <input
+            type="range"
+            min="0"
+            max="5"
+            id="organize"
+            formControlName="organize"
+          />
+
+          <label for="present"> Trình bày, Giao tiếp </label>
+          <input
+            type="range"
+            min="0"
+            max="5"
+            d="present"
+            formControlName="present"
+          />
+
+          <label for="handle"> Xử lý tình huống </label>
+          <input type="range" min="0" max="5" d="handle" formControlName="handle" />
+        </div>
+
+        <div>
+          Điểm môn học
+          <div *ngFor="let subject of subjects">
+            <label>{{subject.name}}</label>
+            <input type="text" id="" />
+          </div>
+        </div>
+
+        <div formGroupName="address">
+          <label> Chỗ ở</label>
+          <input type="text" formControlName="content" />
+          <select formControlName="isVisible">
+            <option value="hidden">Ẩn</option>
+            <option value="show">Hiện</option>
+          </select>
+        </div>
+        <div formGroupName="height">
+          <label> Chiều cao</label>
+          <input type="text" formControlName="content" />
+          <select formControlName="isVisible">
+            <option value="hidden">Ẩn</option>
+            <option value="show">Hiện</option>
+          </select>
+        </div>
+        <div formGroupName="weight">
+          <label> Cân nặng</label>
+          <input type="text" formControlName="content" />
+          <select formControlName="isVisible">
+            <option value="hidden">Ẩn</option>
+            <option value="show">Hiện</option>
+          </select>
+        </div>
+      </form>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="edit_submit()">Save changes</button>
       </div>
     </div>
   </div>

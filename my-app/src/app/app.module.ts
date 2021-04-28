@@ -8,7 +8,6 @@ import { AppComponent } from './app.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { HomeComponent } from './home/home.component';
-import { ProfileComponent } from './profile/profile.component';
 import { ProfileVisitComponent } from './profile-visit/profile-visit.component';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { AngularFireModule } from '@angular/fire';
@@ -18,6 +17,8 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { VoteComponent } from './vote/vote.component';
 import { AddClassComponent } from './add-class/add-class.component';
 import { HttpClientModule } from '@angular/common/http';
+import { HeaderComponent } from './header/header.component';
+import { LogOutComponent } from './log-out/log-out.component';
 
 
 @NgModule({
@@ -26,12 +27,13 @@ import { HttpClientModule } from '@angular/common/http';
     SignInComponent,
     SignUpComponent,
     HomeComponent,
-    ProfileComponent,
     ProfileVisitComponent,
     FeedbackComponent,
     ProfileEditComponent,
       VoteComponent,
-      AddClassComponent
+      AddClassComponent,
+      HeaderComponent,
+      LogOutComponent
    ],
   imports: [
     BrowserModule,

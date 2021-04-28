@@ -39,8 +39,8 @@ export class SignUpComponent implements OnInit {
     if (this.checkValidate == false && this.checkPassword == false) {
         this.authService.register(this.email, this.password).then(
           res => {
-            console.log(res)
-            this.router.navigate(['/profile-edit']);
+            AuthService.user = res.user
+            this.router.navigate(['/profile/'+ AuthService.user.uid]);
           },
           error => {
             if(error.code == "auth/email-already-in-use") this.checkEmail = true

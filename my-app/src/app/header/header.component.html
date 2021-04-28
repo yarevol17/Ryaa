@@ -1,0 +1,87 @@
+
+<head>
+
+</head>
+<style>
+   * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: 'Poppins',sans-serif;
+}
+.topnav {
+    display: flex;
+    margin: 25px;
+    padding:20px;
+}
+.topnav img {
+    max-width: 100%;
+    padding: 20px 0;
+
+}
+.topnav_right, .row-2 {
+    flex: 1;
+    text-align: right;
+}
+.topnav_right ul,.row-2 ul {
+    display: inline-block;
+    list-style-type: none;
+}
+.topnav_right ul li,.row-2 ul li {
+    display: inline-block;
+    margin-right: 20px;
+
+}
+.row-2 ul li {
+    background: #fff;
+    cursor: pointer;
+    padding :8px 20px;
+    margin:5px;
+    border:1px solid #ff523b;
+}
+.row-2 ul li:hover {
+    background: #ff523b;
+    color: #fff;
+}
+a {
+    text-decoration: none;
+    color: #555;
+}
+p {
+    color:#555;
+}
+.header {
+    background: #BFD4DB;
+    margin:0;
+}
+.header .row {
+    margin-top:70px ;
+}
+</style>
+<body>
+  <div class="header">   <!--Header-->
+    <div class="container">
+        <div class="topnav">
+          <a routerLink="/home"><img src='assets/image/quynh.jpg' width="60" height="40"></a>
+            <div class="topnav_right">
+              <ul>
+                <li><a href='index.html'>Trang chủ</a></li>
+                <li><a href='./products/products.html'>Products</a></li>
+                <li><a href=''>About</a></li>
+                <li><a href='#contact' >Contact</a></li>
+                <li><a href="./login/login.html">Login</a></li>
+              </ul>
+            </div>
+            <img src='images/cart.png' width="30px" height="30px">
+            <img src='images/menu.png' class='menu-icon' onclick='menutoggle()' width="30px" height="30px" padding="auto">
+        </div>
+        </div>
+        <div class="row" >
+            <img src='images/carousel/picture-3.png'>
+
+        </div>
+        <!--Header-->
+</div>
+</body>
