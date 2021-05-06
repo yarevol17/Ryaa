@@ -78,6 +78,8 @@ export class ProfileVisitComponent implements OnInit {
   professors: any = [];
   year: string = '';
   major: string = '';
+  skillsForm: FormGroup = new FormGroup({});
+  subjectsForm: FormGroup = new FormGroup({});
   profileForm: FormGroup = new FormGroup({});
 
   @ViewChild('rateList') rateList?: ElementRef;
@@ -180,14 +182,7 @@ export class ProfileVisitComponent implements OnInit {
         aptis: new FormControl(),
         others: new FormControl(),
       }),
-      skills: new FormGroup(
-        {
-          altium: new FormControl(),
-          Cpp: new FormControl(),
-          matlab: new FormControl(),
-          hfss: new FormControl(),
-        }
-      ),
+      skills: this.skillsForm,
       softSkills: new FormGroup({
         teamwork: new FormControl(),
         selfwork: new FormControl(),
@@ -195,7 +190,7 @@ export class ProfileVisitComponent implements OnInit {
         present: new FormControl(),
         handle: new FormControl(),
       }),
-      scores: new FormControl(),
+      subjects: this.subjectsForm,
       address: new FormGroup({
         content: new FormControl(),
         isVisible: new FormControl(),
@@ -270,7 +265,10 @@ export class ProfileVisitComponent implements OnInit {
     this.majorService
       .getSubjectsByMajor(majorId)
       .subscribe((res) => {
-        this.subjects = res,
+        this.subjects = res;
+        for (let i = 0; i < this.subjects.length; i++) {
+          this.subjectsForm.addControl(this.subjects[i].name, new FormControl());
+        }
         console.log(res)
       });
     }
@@ -282,8 +280,7 @@ export class ProfileVisitComponent implements OnInit {
       .subscribe((res) => {
         this.skills = res;
         for (let i = 0; i < this.skills.length; i++) {
-          // this.profileForm.get('skills').addControl(this.skills[i].name, new FormControl())
-
+          this.skillsForm.addControl(this.skills[i].name, new FormControl());
         }
         console.log(res)
       });

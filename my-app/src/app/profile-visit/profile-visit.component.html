@@ -304,11 +304,11 @@
           <input type="range" min="0" max="5" d="handle" formControlName="handle" />
         </div>
 
-        <div>
+        <div formGroupName="subjects">
           Điểm môn học
           <div *ngFor="let subject of subjects">
             <label>{{subject.name}}</label>
-            <input type="text" id="" />
+            <input type="number" id="" formControlName="{{subject.name}}" />
           </div>
         </div>
 
