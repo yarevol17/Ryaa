@@ -19,7 +19,7 @@
     <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#detail" aria-expanded="false" aria-controls="detail" (click)="getRateDetail()">
       Chi tiết
     </button>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#rate" *ngIf=" (authService.getUser() != id)">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#rate" *ngIf="authService.getUser().email && (authService.getUser().email != email)">
       Chấm điểm
     </button>
   </div>
@@ -44,6 +44,7 @@
 <div>Khóa: 62</div>
 <div>Lớp: CTTN ĐTTT K62</div>
 <div>Chuyên ngành: ĐTMT</div>
+
 <div>Nghiên cứu: Không</div>
 
 </div>
@@ -126,7 +127,7 @@
 
         <div>
           <label for="name"> Tên sinh viên</label>
-          <input type="text" id="name" formControlName="username" />
+          <input type="text" id="name" formControlName="displayname" />
         </div>
 
         <div>
@@ -158,8 +159,8 @@
 
         <div>
           Lớp:
-          <select formControlName="class">
-            <option *ngFor="let class of classes" [value]="class">
+          <select formControlName="classs">
+            <option *ngFor="let class of classes" [value]="class._id">
               {{ class.name }}
             </option>
           </select>
@@ -198,8 +199,8 @@
           <label> Điểm mạnh</label>
           <input type="text" formControlName="content" />
           <select formControlName="isVisible">
-            <option value="hidden">Ẩn</option>
-            <option value="show">Hiện</option>
+            <option value="false">Ẩn</option>
+            <option value="true">Hiện</option>
           </select>
         </div>
 
@@ -207,8 +208,8 @@
           <label> Điểm yếu</label>
           <input type="text" formControlName="content" />
           <select formControlName="isVisible">
-            <option value="hidden">Ẩn</option>
-            <option value="show">Hiện</option>
+            <option value="false">Ẩn</option>
+            <option value="true">Hiện</option>
           </select>
         </div>
 
@@ -216,15 +217,15 @@
           <label> Sở thích</label>
           <input type="text" formGroupName="content" />
           <select formControlName="isVisible">
-            <option value="hidden">Ẩn</option>
-            <option value="show">Hiện</option>
+            <option value="false">Ẩn</option>
+            <option value="true">Hiện</option>
           </select>
         </div>
 
         <div>
           Lab nghiên cứu:
           <select formControlName="lab">
-            <option *ngFor="let lab of labs" [value]="lab">
+            <option *ngFor="let lab of labs" [value]="lab._id">
               {{ lab.name }}
             </option>
           </select>
@@ -316,24 +317,24 @@
           <label> Chỗ ở</label>
           <input type="text" formControlName="content" />
           <select formControlName="isVisible">
-            <option value="hidden">Ẩn</option>
-            <option value="show">Hiện</option>
+            <option value="false">Ẩn</option>
+            <option value="true">Hiện</option>
           </select>
         </div>
         <div formGroupName="height">
           <label> Chiều cao</label>
           <input type="text" formControlName="content" />
           <select formControlName="isVisible">
-            <option value="hidden">Ẩn</option>
-            <option value="show">Hiện</option>
+            <option value="false">Ẩn</option>
+            <option value="true">Hiện</option>
           </select>
         </div>
         <div formGroupName="weight">
           <label> Cân nặng</label>
           <input type="text" formControlName="content" />
           <select formControlName="isVisible">
-            <option value="hidden">Ẩn</option>
-            <option value="show">Hiện</option>
+            <option value="false">Ẩn</option>
+            <option value="true">Hiện</option>
           </select>
         </div>
       </form>

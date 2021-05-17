@@ -32,7 +32,6 @@ exports.createClass = (req, res, next) => {
 
 exports.getClassesByYear = (req, res, next) => {
   Class.find({year: req.params.yearId}).then(classes => {
-    console.log(classes)
     return res.status(200).json(classes)
   }, err => {
     return res.status(500).json({msg: "Lỗi"})

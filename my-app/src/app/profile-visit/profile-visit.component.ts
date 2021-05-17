@@ -103,7 +103,6 @@ export class ProfileVisitComponent implements OnInit {
     });
 
     this.yearService.getYears().subscribe((res) => {
-      console.log(res);
       this.years = res;
       this.years.sort((a: { name: string }, b: { name: string }) => {
         var nameA = a.name.toUpperCase(); // bỏ qua hoa thường
@@ -121,7 +120,6 @@ export class ProfileVisitComponent implements OnInit {
     });
 
     this.majorService.getMajors().subscribe((res) => {
-      console.log(res);
       this.majors = res;
       // this.majors.sort((a: { name: string }, b: { name: string }) => {
       //   var nameA = a.name.toUpperCase(); // bỏ qua hoa thường
@@ -155,11 +153,11 @@ export class ProfileVisitComponent implements OnInit {
     });
 
     this.profileForm = new FormGroup({
-      username: new FormControl(null, [Validators.required]),
+      displayname: new FormControl(null, [Validators.required]),
       quotes: new FormControl(),
       school: new FormControl(),
       year: new FormControl(),
-      class: new FormControl(),
+      classs: new FormControl(),
       degree: new FormControl(),
       major: new FormControl(),
       project: new FormControl(),
@@ -262,14 +260,14 @@ export class ProfileVisitComponent implements OnInit {
   // }
 
   getClasses(event: Event, yearId: any) {
-    console.log(yearId);
+
     this.yearService
       .getClassByYear(yearId)
       .subscribe((res) => (this.classes = res));
   }
 
   getSubjects(event: Event, majorId: any) {
-    console.log(majorId);
+
     this.majorService
       .getSubjectsByMajor(majorId)
       .subscribe((res) => {
@@ -282,7 +280,7 @@ export class ProfileVisitComponent implements OnInit {
     }
 
   getSkills(event: Event, majorId: any) {
-    console.log(majorId);
+
     this.majorService
       .getSkillsByMajor(majorId)
       .subscribe((res) => {
