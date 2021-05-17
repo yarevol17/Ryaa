@@ -7,8 +7,9 @@
     </ul>
   </nav>
 
-<div class="form">
-  <input id = "email" type="text" [(ngModel)]="email" placeholder = "Email">
+<form [formGroup]="registerForm">
+<div>
+  <input id = "email" type="text" formControlName="email" placeholder = "Email" >
   <!-- Angular If - câu lệnh kiểm tra điều kiện -->
   <div *ngIf="checkEmail">
     <p>Email đã được sử dụng</p>
@@ -16,22 +17,23 @@
 </div>
 
 <div class="form">
-  <input id = "password" type="text" [(ngModel)]="password" placeholder = "Mật khẩu">
+  <input id = "" type="text" formControlName="password" placeholder = "Mật khẩu" >
 </div>
 
 <div class="form">
-  <input id = "password" type="text" [(ngModel)]="rePassword" placeholder = "Nhập lại mật khẩu">
+  <input id = "" type="text" formControlName="repassword" placeholder = "Nhập lại mật khẩu" >
   <div *ngIf="checkPassword">
     <p>Password nhập lại không đúng</p>
   </div>
 </div>
 
 <div class="status">
-  <input name = "status" id="one" type="radio" value="1" [(ngModel)]="student"> Bạn là sinh viên
+  <select formControlName="role">
+    <option value="student">Sinh viên</option>
+    <option value="professor">Giảng viên</option>
+  </select>
 </div>
-<div class="status">
-  <input name = "status" id="two" type="radio" value="2" [(ngModel)]="student"> Bạn là giảng viên
-</div>
+</form>
   <!-- Thực hiện 1 điều gì đấy -->
   <button (click)="signUp()">Đăng kí</button>
   <div *ngIf="checkValidate">

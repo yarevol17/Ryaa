@@ -2,8 +2,16 @@
   <nav class = header__nav>
     <ul class="class header__nav-list">
       <li class="class header__nav-item"><a routerLink="/home">Trang chủ</a></li>
-      <li class="class header__nav-item"><a routerLink="/sign-in">Đăng nhập</a></li>
-      <li class="class header__nav-item"><a routerLink="/sign-up">Đăng kí</a></li>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#sign-in" *ngIf=" (authService.getUser() == undefined)">
+        Đăng nhập
+      </button>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#sign-up" *ngIf=" (authService.getUser() == undefined)">
+        Đăng kí
+      </button>
+      <button (click)="goProfile()" *ngIf=" (authService.getUser() != undefined)">Trang cá nhân</button>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#sign-out" *ngIf=" (authService.getUser() != undefined)">
+        Đăng xuất
+      </button>
     </ul>
   </nav>
 
@@ -64,3 +72,110 @@
     </th>
   </tr>
 </table>
+
+
+<div class="modal fade" id="sign-up" tabindex="-1" role="dialog" aria-labelledby="sign-upTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="sign-upTitle">Đăng kí</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    <form [formGroup]="registerForm">
+      <div>
+          <input id = "email" type="text" formControlName="email" placeholder = "Email" >
+          <!-- Angular If - câu lệnh kiểm tra điều kiện -->
+          <div *ngIf="checkEmail">
+            <p>Email đã được sử dụng</p>
+          </div>
+      </div>
+
+      <div class="form">
+          <input id = "" type="text" formControlName="password" placeholder = "Mật khẩu" >
+      </div>
+
+      <div class="form">
+          <input id = "" type="text" formControlName="repassword" placeholder = "Nhập lại mật khẩu" >
+          <div *ngIf="checkPassword">
+            <p>Password nhập lại không đúng</p>
+          </div>
+      </div>
+
+      <div class="status">
+          Bạn là?
+          <select formControlName="role">
+            <option value="student">Sinh viên</option>
+            <option value="professor">Giảng viên</option>
+          </select>
+      </div>
+    </form>
+    <div *ngIf="checkValidate">
+      <p>Không được để trống các giá trị!</p>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-primary" (click)="signUp()">Đăng kí</button>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#sign-in" data-dismiss="modal">
+        Bạn đã có tài khoản? Đăng nhập
+      </button>
+    </div>
+</div>
+</div>
+</div>
+
+<div class="modal fade" id="sign-out" tabindex="-1" role="dialog" aria-labelledby="sign-outTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <h5 class="modal-title" id="sign-outTitle">Bạn có chắc muốn đăng xuất?</h5>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-dismiss="modal" (click)="signOut()">
+         Đăng xuất
+      </button>
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">Không</button>
+</div>
+</div>
+</div>
+
+<div class="modal fade" id="sign-out" tabindex="-1" role="dialog" aria-labelledby="sign-inTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="sign-inTitle">Đăng nhập</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="form">
+        <input id = "account" type="text" [(ngModel)]="account" placeholder = "Tài khoản">
+      </div>
+
+      <div class="form">
+        <input id = "password" type="text" [(ngModel)]="password" placeholder = "Mật khẩu">
+      </div>
+
+      <div *ngIf="checkValidate">
+        <p>Không được để trống các giá trị!</p>
+      </div>
+      <div *ngIf="checkAccount">
+        <p>Tài khoản hoặc mật khẩu không đúng!</p>
+      </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-primary" (click)="signIn()">Đăng nhập</button>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#sign-up" data-dismiss="modal" >
+        Bạn chưa có tài khoản? Đăng kí
+      </button>
+    </div>
+</div>
+</div>
+</div>
+

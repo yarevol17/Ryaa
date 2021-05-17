@@ -19,7 +19,7 @@
     <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#detail" aria-expanded="false" aria-controls="detail" (click)="getRateDetail()">
       Chi tiết
     </button>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#rate" *ngIf="authService.getUser() && (authService.getUser().uid != id)">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#rate" *ngIf=" (authService.getUser() != id)">
       Chấm điểm
     </button>
   </div>
@@ -35,8 +35,8 @@
       </div>
   </div>
 
-<div>Thông tin chi tiết</div>
-  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit" *ngIf="authService.getUser() && (authService.getUser().uid == id)">
+<div *ngIf="authService.getUser()">Thông tin chi tiết</div>
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit" *ngIf="authService.getUser().email && (authService.getUser().email == email)">
     Chỉnh sửa
   </button>
 <div class="more-info">
@@ -339,7 +339,7 @@
       </form>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="edit_submit()">Save changes</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)=" infor_submit()">Save changes</button>
       </div>
     </div>
   </div>

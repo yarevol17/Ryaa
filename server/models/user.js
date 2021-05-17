@@ -2,14 +2,17 @@ const mongoose = require("mongoose");
 const uniqueValidator = require("mongoose-unique-validator");
 
 const userSchema = new mongoose.Schema({
-  username: { type: String, require: true },
+  email: { type: String, require: true },
+  password: { type: String, require: true },
+  FId: { type: String, require: true },
+  displayname: { type: String, require: true },
   rating: [
     { type: mongoose.Schema.Types.ObjectId, ref: "Rating" }
   ],
   quotes: { type: String },
   school: { type: String, require: true },
   year: { type: String, require: true },
-  class: { type: mongoose.Schema.Types.ObjectId, ref: "Class", require: true },
+  classs: { type: mongoose.Schema.Types.ObjectId, ref: "Class", require: true },
   major: { type: String, require: true },
   projects: {type: String},
   strength: {
@@ -35,7 +38,7 @@ const userSchema = new mongoose.Schema({
   softskills: [{
     name: Number
   }],
-  scores: [{
+  subjects: [{
     name: Number
   }],
   address: {
@@ -50,7 +53,7 @@ const userSchema = new mongoose.Schema({
     description1: String,
     isVisible: { type: Boolean, default: false }
   },
-  role: {type: String, default: 'user'}
+  role: {type: String}
 });
 
 userSchema.plugin(uniqueValidator);

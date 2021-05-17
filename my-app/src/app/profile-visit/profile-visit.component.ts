@@ -7,6 +7,7 @@ import { Variable } from '@angular/compiler/src/render3/r3_ast';
 import { YearService } from './../services/year.service';
 import { MajorService } from './../services/major.service';
 import { LabService } from './../services/lab.service';
+import { UserService } from './../services/user.service';
 
 @Component({
   selector: 'app-profile-visit',
@@ -20,9 +21,10 @@ export class ProfileVisitComponent implements OnInit {
     private readonly yearService: YearService,
     private readonly majorService: MajorService,
     private readonly labService: LabService,
-    public authService: AuthService
+    public authService: AuthService,
+    public userService: UserService
   ) {
-    this.authService.resolveUser()
+    // this.authService.resolveUser()
   }
 
   id: string = '';
@@ -78,6 +80,7 @@ export class ProfileVisitComponent implements OnInit {
   professors: any = [];
   year: string = '';
   major: string = '';
+  email: string = '';
   skillsForm: FormGroup = new FormGroup({});
   subjectsForm: FormGroup = new FormGroup({});
   profileForm: FormGroup = new FormGroup({});
@@ -85,11 +88,9 @@ export class ProfileVisitComponent implements OnInit {
   @ViewChild('rateList') rateList?: ElementRef;
 
   ngOnInit() {
-    this.activatedRoute.params.subscribe((id) => {
-      this.id = id['id'];
-      // put user service get user by id here
-      console.log(this.id);
-
+    // this.authService.resolveUser();
+    this.activatedRoute.params.subscribe((param) => {
+      this.email = param['email'];
     });
     this.rateForm = new FormGroup({
       ability: new FormControl(5),
@@ -207,6 +208,13 @@ export class ProfileVisitComponent implements OnInit {
   }
   save() {}
 
+  infor_submit() {
+    console.log(this.profileForm.value);
+    this.userService
+      .updateUser(AuthService.user.email, this.profileForm.value)
+      .subscribe((res) => console.log(res));
+  }
+
   rating_submit() {
     console.log(this.rateForm.value);
     this.rateService
@@ -290,4 +298,6 @@ export class ProfileVisitComponent implements OnInit {
       console.log(this.profileForm.value);
 
     }
+
+
 }

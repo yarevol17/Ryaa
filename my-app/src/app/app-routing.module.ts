@@ -15,7 +15,7 @@ const routes: Routes = [
   { path: 'sign-in', component: SignInComponent },
   { path: 'sign-up', component: SignUpComponent },
   // { path: 'profile-edit', component: ProfileEditComponent },
-  { path: 'profile/:id', component: ProfileVisitComponent },
+  { path: 'profile/:email', component: ProfileVisitComponent },
   { path: 'add-class', component: AddClassComponent },
 ];
 

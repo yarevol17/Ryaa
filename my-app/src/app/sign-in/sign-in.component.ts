@@ -40,6 +40,7 @@ export class SignInComponent implements OnInit {
   this.authService.doEmailLogin(this.account.trim(), this.password).then(
     result => {
       AuthService.user = result.user
+      console.log(result.user);
       this.router.navigate(['/home/']);
     },
     error => {
