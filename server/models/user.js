@@ -13,6 +13,7 @@ const userSchema = new mongoose.Schema({
   classs: { type: mongoose.Schema.Types.ObjectId, ref: "Class", require: true },
   major: { type: String, require: true },
   projects: { type: String },
+  idea: { type: String },
   strength: {
     description1: String,
     isVisible: { type: String, default: "false" },

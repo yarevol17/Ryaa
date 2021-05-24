@@ -15,6 +15,10 @@ export class UserService {
     return this.http.get(environment.serverURL + 'user')
   }
 
+  getProfessors() {
+    return this.http.get(environment.serverURL + 'professor')
+  }
+
   creatUser(formdata: any) {
     return this.http.post(environment.serverURL + 'user/', formdata)
   }
